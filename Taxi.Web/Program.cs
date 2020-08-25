@@ -27,8 +27,8 @@ namespace Taxi.Web
 
         private static void RunSeeding(IWebHost host)
         {
-            IServiceScopeFactory scopeFactory = host.Services.GetService<IServiceScopeFactory>();
-            using (IServiceScope scope = scopeFactory.CreateScope())
+            var scopeFactory = host.Services.GetService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope())
             {
                 SeedDb seeder = scope.ServiceProvider.GetService<SeedDb>();
                 seeder.SeedAsync().Wait(); //Wait till data is added to DB for Testing  
