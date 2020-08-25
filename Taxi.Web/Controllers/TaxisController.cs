@@ -116,6 +116,8 @@ namespace Taxi.Web.Controllers
             {
                 return NotFound();
             }
+            //TODO Make a ConfirmationSheet when this is found, dont use another page
+
             _context.Taxis.Remove(taxiEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

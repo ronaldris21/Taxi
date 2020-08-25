@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Taxi.Web.Data.Entities;
 
 namespace Taxi.Web.Data
@@ -11,12 +7,15 @@ namespace Taxi.Web.Data
     {
 
         //TODO Make a Snippets of this ctor and DbSet<>
-        public DataContext(DbContextOptions<DataContext> options): base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
 
         public DbSet<TaxiEntity> Taxis { get; set; }
+        public DbSet<Entities.TripDetailEntity> TripDetais { get; set; }
+        public DbSet<Entities.TripEntity> Trips { get; set; }
+
 
     }
 }
