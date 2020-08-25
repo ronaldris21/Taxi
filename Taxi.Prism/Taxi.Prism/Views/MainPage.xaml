@@ -1,11 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Taxi.Prism.Views.MainPage"
-             Title="{Binding Title}">
+<ContentPage
+    x:Class="Taxi.Prism.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}"
+    NavigationPage.HasNavigationBar="False">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+    <RefreshView
+        x:Name="refresher"
+        IsRefreshing="False"
+        Refreshing="RefreshView_Refreshing">
+        <WebView
+            HorizontalOptions="Fill"
+            Source="https://social.msdn.microsoft.com/Forums/sqlserver/en-US/d5e0c6e5-8e44-4ad5-9591-20dc0ac7a870/nvarcharmax?forum=transactsql"
+            VerticalOptions="Fill" />
+    </RefreshView>
+
+    <!--<StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+    </StackLayout>-->
 
 </ContentPage>

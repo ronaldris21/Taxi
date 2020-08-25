@@ -6,5 +6,13 @@
         {
             InitializeComponent();
         }
+
+        private void RefreshView_Refreshing(object sender, System.EventArgs e)
+        {
+            //Whatever you want to do
+
+
+            refresher.IsRefreshing = false;
+        }
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Taxi.Web.Data;
 
 namespace Taxi.Web
 {
@@ -38,6 +39,7 @@ namespace Taxi.Web
                 dbc.UseSqlServer(Configuration.GetConnectionString("DefaultConnetion"));
             });
 
+            services.AddTransient<SeedDb>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
