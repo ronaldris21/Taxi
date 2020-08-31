@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Taxi.Web.Data;
+using Taxi.Web.Data.Entities;
+using Taxi.Web.Helpers;
 
 namespace Taxi.Web
 {
@@ -33,6 +36,15 @@ namespace Taxi.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddIdentity<UserEntity, IdentityRole>(confi =>{
+                confi.User.RequireUniqueEmail = true;
+                confi.Password.RequireDigit = false;
+                confi.Password.RequiredUniqueChars = 0;
+                confi.Password.RequireLowercase = false;
+                confi.Password.RequireUppercase = false; 
+                confi.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<DataContext>();
+
             //Add DB Context - Connection String from appsettings.json
             services.AddDbContext<Data.DataContext>(dbc =>
             {
@@ -40,6 +52,7 @@ namespace Taxi.Web
             });
 
             services.AddTransient<SeedDb>();
+            services.AddScoped<IUserHelper, UserHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -58,6 +71,7 @@ namespace Taxi.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>
